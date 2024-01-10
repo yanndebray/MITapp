@@ -1,48 +1,6 @@
 
-# <span style="color:rgb(213,80,0)">Solar Panel Output Estimator</span>
+# <span style="color:rgb(213,80,0)">Solar Panel Output Estimator</span> [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=yanndebray/MITapp&file=SolarPanelEstimator.mlx)
 
-Specify the location of your panels.
-
-```matlab
-% Calculate Solar Time
-location = [42.35 -71.0589 -5];
-[lambda, phi, UTCoff, TZ, localYear, localMonth, localDay, beta, tau, pRad] = solTime(location);
-
-```
-
-Specify the panel size and efficiency value.
-
-```matlab
-% Calculate Panel Size and Efficiency
-pSize = 30;                          % Panel size in m^2
-eff = 49;                         % Panel efficiency
-pElec = eff*pSize*pRad;                                    % Panel electric output in kW
- 
-```
-## Results: 
-```matlab
-disp(['Expected electrical output = ' num2str(pElec) ' kW'])
-```
-
-```TextOutput
-Expected electrical output = 1321.3423 kW
-```
-
-```matlab
-clf
-% Calculate Power Generation Over Time
-isFixed = 1;
-date = datetime(localYear,localMonth,localDay,'TimeZone',TZ);                      
-[times, sRad, pRad] = hourlyPanelRadiation(date, lambda, phi, UTCoff, tau, beta, isFixed) ;
-hold on
-bar(times,pRad)
-plot(times,sRad)
-title(['Solar and Panel Radiation for ' datestr(date,'mmmm dd yyyy')])
-xlabel('Hour of Day');
-ylabel('Radiation, kW/m^2')
-legend('Available Solar Radiation','Solar Radiation on Panel', 'Location','South')
-hold off
-```
 
 <center><img src="README_media/figure_0.png" width="578" alt="figure_0.png"></center>
 
@@ -94,5 +52,5 @@ end
  ** To view the code for this example, go to the* ***View*** *tab and click* ***Output on Right*** *or* ***Output Inline****.*
 
 
-*Copyright 2019 The MathWorks, Inc.*
+*Copyright 2019-2024 The MathWorks, Inc.*
 
